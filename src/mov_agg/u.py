@@ -12,15 +12,20 @@ def merge(load_dt="20240724"):
        ]
     df = read_df[cols]
     # 울버린 만조회
-    #df_where = df[(df['movieCd'] == '20247781') & (df['load_dt'] == int(load_dt))].copy() #날짜조건 load_dt 인자 받기
-    df_where = df[(df['movieCd'] == '20235974') & (df['load_dt'] == int(load_dt))].copy() #날짜조건 load_dt 인자 받기 print(df_where) 
+    df_where = df[(df['movieCd'] == '20247781') & (df['load_dt'] == 20240724)].copy() #날짜조건 load_dt 인자 받기
+    #df_where = df[(df['movieCd'] == '20235974') & (df['load_dt'] == int(load_dt))].copy() #날짜조건 load_dt 인자 받기 print(df_where) 
     print(df_where.dtypes)
 
     # 카테고리 타입 -> Object
     df_where['load_dt'] = df_where['load_dt'].astype('object')
     df_where['multiMovieYn'] = df_where['multiMovieYn'].astype('object')
     df_where['repNationCd'] = df_where['repNationCd'].astype('object')
+    
+    # NaN 값 unknown 으로 변경
+    df_where['multiMovieYn'] = df_where['multiMovieYn'].fillna('unknown')
+    df_where['repNationCd'] = df_where['repNationCd'].fillna('unknown')
     print(df_where.dtypes)
+    print(df_where)
     return df_where
     
 
